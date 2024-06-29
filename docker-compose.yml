@@ -1,34 +1,14 @@
-version: '3'
+version: '3.8'
 services:
-  frontend:
-    build:
-      context: ./Frontend
-      dockerfile: Dockerfile
-    ports:
-      - "3000:3000"
-    depends_on:
-      - backend
-
   backend:
-    build:
-      context: ./Backend
-      dockerfile: Dockerfile
+    build: ./Backend
     ports:
-      - "3001:3001"
-    env_file:
-      - ./Backend/.env
-    depends_on:
-      - mongodb
-
-  mongodb:
-    image: mongo:latest
-    ports:
-      - "27017:27017"
+      - '3001:3001'
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=your-mongo-username
-      - MONGO_INITDB_ROOT_PASSWORD=your-mongo-password
-    volumes:
-      - mongo-data:/data/db
+      - MONGODB_URI=mongodb+srv://sithumini1215:FbP2QL5oEMkjN4wD@cluster0.fe8crkc.mongodb.net/result-management-devops?retryWrites=true&w=majority
 
-volumes:
-  mongo-data:
+  frontend:
+    build: ./Frontend
+    ports:
+      - '3000:3000'
+
